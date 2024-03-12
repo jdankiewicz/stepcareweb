@@ -1,13 +1,49 @@
 ---
 title: "stepcareweb"
+date: today
 ---
 
-This is a Quarto website.
+## STEPCARE - REPORT2
 
-GoGoGoGOGOGOGO
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(here)
+library(openxlsx)
+library(reshape2)
+library(tidyr)
+library(readxl)
+library(stringr)
+library(here)
+library(tableone)
+library(knitr)
+library(kableExtra)
+library(purrr)
+library(gtsummary)
+library(gt)
+library(flextable)
+library(tidymodels)
+library(broom)
+library(stringr)
+library(R.utils)
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
 ```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+parentpath <- gsub("stepcareweb","",here())
+imagefiles <- paste0(parentpath,"plots")
+
+R.utils::copyDirectory(imagefiles, here("images"))
+```
+
+Begin with inclusion by country
+
+![Countries](images/country_barplot.png){width="100%"} ![Hospitals](images/hospital_and_country_barplot.png){width="100%"}
+
+![Inclusion](images/linear_inclusion_until_now.png){width="100%"}
+
+![Inclusion_prediction](images/linear_prediction_current_inclusion_with_text.png){width="100%"}
+
+
+![Inclusion_numbers](images/linear_prediction_varying_inclusion.png){width="100%"}
+
+HI
