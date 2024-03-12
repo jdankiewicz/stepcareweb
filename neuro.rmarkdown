@@ -5,7 +5,9 @@ embed-resources: true
 editor: visual
 ---
 
+
 ## STEPCARE - REPORT2
+
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
@@ -29,7 +31,6 @@ library(broom)
 ## Read the other files. 
 prep <- readRDS("/Users/josefdankiewicz/Library/CloudStorage/OneDrive-SharedLibraries-LundUniversity/cardiacarrest - Documents/STEPCARE/data/RDS/prep.rds")
 ```
-
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 ##################################
@@ -93,15 +94,21 @@ names(wlst_reason_brain) <- c("StudyPatientID","Other reason for WLST","Other_Sp
 #   5) Were biomarkers collected around 12 and 24 h after randomisation? Hours from randomisation to collection of 1st, 2nd, 3rd and 4th samples. 
 ```
 
+
 ### Patients with a long time to prognostication
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 kable(late_neuroprog, format="markdown")
 ```
+
 ### Patients with a short time to prognostication
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 kable(early_neuroprog, format="markdown")
 ```
+
 ### Description of the patients with short times to prognostication
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
 ## Need to include PRINT and AS.IS and CAT for a break in the loop ##
 for (i in 1:nrow(early_neuroprog)){
@@ -109,11 +116,11 @@ print(kable(llist[[i]], format="markdown"))
   cat("\n")
 }
 ```
+
 ## WLST
 ### Patients with short times to WLST
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 kable(wlst_reason_brain, format="markdown")
 ```
-
-
 
