@@ -27,8 +27,7 @@ library(tidymodels)
 library(broom)
 
 ## Read the other files. 
-source("/Users/josefdankiewicz/Library/CloudStorage/OneDrive-SharedLibraries-LundUniversity/cardiacarrest - Documents/STEPCARE/data/script/prep.R")
-
+prep <- readRDS("/Users/josefdankiewicz/Library/CloudStorage/OneDrive-SharedLibraries-LundUniversity/cardiacarrest - Documents/STEPCARE/data/RDS/prep.rds")
 ```
 
 
