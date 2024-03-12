@@ -39,16 +39,49 @@ prep <- readRDS("/Users/josefdankiewicz/Library/CloudStorage/OneDrive-SharedLibr
 # #1) Timepoint randomisation to prognostication <68 hours? (Y/N), if <68 h, 
 # how many hours after randomisation was prognostication performed?
 
-prep$hours.to.prog <- as.numeric(prep$N_PROG_DateTime - prep$randomisation.datetime, units="hours")
-
 ## Very high numbers over 120 ##
 late_neuroprog <- prep %>% select(StudyPatientID,hours.to.prog) %>% filter(hours.to.prog>120)
 ## Low numbers over 120 ##
 early_neuroprog <- prep %>% select(StudyPatientID,hours.to.prog) %>% filter(hours.to.prog<68)
-## Causes ## 
+
+proglist <- c("N_PROG_PoorPrognosis", "DIS_WLSTDecisionMade","DIS_ICStopReasonsBrainInjury","DIS_ICStopReasonsOrganFailure",
+              "DIS_ICStopReasonsComorbidity","N_NSE48h","N_EEGHMalignant1st","N_CT_HIE1st","N_MRI_HIE1st",
+              "N_N20AbsentBilateral","VIT_DeathDateTime","hours.to.death")
+
+llist <- list()
+for (i in 1:nrow(early_neuroprog)){
+  k <- prep %>% select(StudyPatientID, all_of(proglist))
+  k <- k %>% filter(StudyPatientID==early_neuroprog$StudyPatientID[i])
+  names(k) <- c("ID","Poor prognossis", "WLST time","WLST reason: Brain","WLST reason: Organ Failure","WLST reason: Comorbidity",
+                "NSE at 48h","EEG malignant (1st)","CT HIE","MRI HIE","N20 Absent", "Time of death", "Hours to death")
+  k <- gather(k)
+  k <- k %>% filter(!is.na(value))
+  names(k) <- c(early_neuroprog$StudyPatientID[i], "variable")
+  llist[[i]] <- k
+}
+
+names(llist) <- early_neuroprog$StudyPatientID
+
+## Causes ##  
 
 
 # 2) Timepoint randomisation to WLST cerebral causes < 68 h? If WLST neuro <68h, were there other causes for WLST such as ethical? 
+early_wlst <- prep %>% filter(hours.to.wlst<68) %>% select(StudyPatientID,hours.to.wlst)
+
+## Reasons for early WLST < 68h
+wlst_reason <- prep %>% filter(hours.to.wlst<68) %>% select(StudyPatientID, DIS_ICStopReasonsBrainInjury,
+                                                             DIS_ICStopReasonsOrganFailure, DIS_ICStopReasonsComorbidity,
+                                                            DIS_ICStopReasonsOther,DIS_ICStopReasonsOtherSpecify)
+
+names(wlst_reason) <- c("StudyPatientID","Brain injury","Organ failure","Comorbidity","Other","Other:Spec")
+
+wlst_reason_brain <- prep %>% filter(hours.to.wlst<72) %>% select(StudyPatientID, DIS_ICStopReasonsBrainInjury,
+                                                             DIS_ICStopReasonsOrganFailure, DIS_ICStopReasonsComorbidity,
+                                                            DIS_ICStopReasonsOther,DIS_ICStopReasonsOtherSpecify,location_name) %>%
+  filter(DIS_ICStopReasonsBrainInjury=="Yes") %>% filter(DIS_ICStopReasonsComorbidity=="No") %>% 
+  filter(DIS_ICStopReasonsOrganFailure=="No") %>% select(StudyPatientID,DIS_ICStopReasonsOther,DIS_ICStopReasonsOtherSpecify,location_name)
+
+names(wlst_reason_brain) <- c("StudyPatientID","Other reason for WLST","Other_Specify","Hospital")
 
 
 
@@ -59,4 +92,28 @@ early_neuroprog <- prep %>% select(StudyPatientID,hours.to.prog) %>% filter(hour
 #   4) If no EEG (continuous or routine) was performed ≤32 h after randomisation, was any EEG performed after this timepoint? If so, how many hours after randomisation?
 #   5) Were biomarkers collected around 12 and 24 h after randomisation? Hours from randomisation to collection of 1st, 2nd, 3rd and 4th samples. 
 ```
+
+### Patients with a long time to prognostication
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+kable(late_neuroprog, format="markdown")
+```
+### Patients with a short time to prognostication
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+kable(early_neuroprog, format="markdown")
+```
+### Description of the patients with short times to prognostication
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+## Need to include PRINT and AS.IS and CAT for a break in the loop ##
+for (i in 1:nrow(early_neuroprog)){
+print(kable(llist[[i]], format="markdown"))
+  cat("\n")
+}
+```
+## WLST
+### Patients with short times to WLST
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+kable(wlst_reason_brain, format="markdown")
+```
+
+
 

@@ -19,5 +19,26 @@
     "title": "stepcareweb",
     "section": "",
     "text": "Begin with inclusion by country\n \n\n\n\nInclusion\n\n\n\n\n\nInclusion_prediction\n\n\n\n\n\nInclusion_numbers\n\n\nHI"
+  },
+  {
+    "objectID": "neuro.html",
+    "href": "neuro.html",
+    "title": "Neuro_report",
+    "section": "",
+    "text": "StudyPatientID\nhours.to.prog\n\n\n\n\nCHR0004\n141.8500\n\n\nKAR0002\n284.5000\n\n\nKAR0003\n137.8000\n\n\nLUB0001\n236.1833\n\n\nLUB0005\n136.2667\n\n\nLUX0014\n169.5667\n\n\nMEI0009\n336.2333\n\n\n\n\n\n\n\n\n\n\n\n\n\nStudyPatientID\nhours.to.prog\n\n\n\n\nLUX0005\n45.95\n\n\n\n\n\n\n\n\n\n\n\nLUX0005\nvariable\n\n\n\n\nID\nLUX0005\n\n\nPoor prognossis\nYes\n\n\nNSE at 48h\n31\n\n\nEEG malignant (1st)\nNo\n\n\nCT HIE\nNo\n\n\nMRI HIE\nNo\n\n\nN20 Absent\nNo\n\n\nTime of death\n1702983420\n\n\nHours to death\n563.65"
+  },
+  {
+    "objectID": "neuro.html#stepcare---report2",
+    "href": "neuro.html#stepcare---report2",
+    "title": "Neuro_report",
+    "section": "",
+    "text": "StudyPatientID\nhours.to.prog\n\n\n\n\nCHR0004\n141.8500\n\n\nKAR0002\n284.5000\n\n\nKAR0003\n137.8000\n\n\nLUB0001\n236.1833\n\n\nLUB0005\n136.2667\n\n\nLUX0014\n169.5667\n\n\nMEI0009\n336.2333\n\n\n\n\n\n\n\n\n\n\n\n\n\nStudyPatientID\nhours.to.prog\n\n\n\n\nLUX0005\n45.95\n\n\n\n\n\n\n\n\n\n\n\nLUX0005\nvariable\n\n\n\n\nID\nLUX0005\n\n\nPoor prognossis\nYes\n\n\nNSE at 48h\n31\n\n\nEEG malignant (1st)\nNo\n\n\nCT HIE\nNo\n\n\nMRI HIE\nNo\n\n\nN20 Absent\nNo\n\n\nTime of death\n1702983420\n\n\nHours to death\n563.65"
+  },
+  {
+    "objectID": "neuro.html#wlst",
+    "href": "neuro.html#wlst",
+    "title": "Neuro_report",
+    "section": "WLST",
+    "text": "WLST\n\nPatients with short times to WLST\n\n\n\n\n\n\n\n\n\n\n\nStudyPatientID\nOther reason for WLST\nOther_Specify\nHospital\n\n\n\n\n0380009\nNo\nNA\nWellington Hospital\n\n\nHEL0002\nNo\nNA\nHelsingborg Hospital\n\n\nHEL0008\nNo\nNA\nHelsingborg Hospital\n\n\nLUN0014\nNo\nNA\nSkåne University Hospital Lund\n\n\nMAL0008\nNo\nNA\nSkåne University Hospital Malmö\n\n\nMEI0002\nNo\nNA\nMeilahti Hospital\n\n\nMEI0013\nNo\nNA\nMeilahti Hospital\n\n\nSAH0002\nNo\nNA\nSahlgrenska University Hospital"
   }
 ]
