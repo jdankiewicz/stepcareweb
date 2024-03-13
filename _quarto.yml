@@ -10,7 +10,12 @@ website:
         text: Home
       - href: neuro.qmd
         text: Neuro
+      - href: complete.qmd
+        text: Data Completeness
+      - href: Baseline.qmd
+        text: Baseline
       - about.qmd
+      
 
 
 format:

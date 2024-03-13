@@ -1,0 +1,42 @@
+---
+title: "Baseline"
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(here)
+library(openxlsx)
+library(reshape2)
+library(tidyr)
+library(readxl)
+library(stringr)
+library(here)
+library(tableone)
+library(knitr)
+library(kableExtra)
+library(purrr)
+library(gtsummary)
+library(gt)
+library(flextable)
+library(tidymodels)
+library(broom)
+library(lubridate)
+library(forcats)
+
+## Read the other files. 
+prep <- readRDS("/Users/josefdankiewicz/Library/CloudStorage/OneDrive-SharedLibraries-LundUniversity/cardiacarrest - Documents/STEPCARE/data/RDS/prep.rds")
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+baseline <- prep %>% select(PT_Sex,time.to.rosc,PT_Age,KB_Shockable,KB_Adrenaline,KB_BystanderCPR,BAS_ShockOnAdmission,VIT_Dead) %>% names()
+
+baseline_factors <- prep %>% select(PT_Sex,KB_Shockable,KB_Adrenaline,KB_BystanderCPR,BAS_ShockOnAdmission,VIT_Dead) %>% names()
+
+
+base_table <- CreateTableOne(data=prep,vars=baseline,factorVars = baseline_factors,includeNA = TRUE)
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+kable(print(base_table,catDigits = 1, contDigits=2, quote = FALSE, noSpaces = TRUE))
+```

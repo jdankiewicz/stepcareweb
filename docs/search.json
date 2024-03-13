@@ -39,6 +39,13 @@
     "href": "neuro.html#wlst",
     "title": "Neuro_report",
     "section": "WLST",
-    "text": "WLST\n\nPatients with short times to WLST\n\n\n\n\n\n\n\n\n\n\n\nStudyPatientID\nOther reason for WLST\nOther_Specify\nHospital\n\n\n\n\n0380009\nNo\nNA\nWellington Hospital\n\n\nHEL0002\nNo\nNA\nHelsingborg Hospital\n\n\nHEL0008\nNo\nNA\nHelsingborg Hospital\n\n\nLUN0014\nNo\nNA\nSkåne University Hospital Lund\n\n\nMAL0008\nNo\nNA\nSkåne University Hospital Malmö\n\n\nMEI0002\nNo\nNA\nMeilahti Hospital\n\n\nMEI0013\nNo\nNA\nMeilahti Hospital\n\n\nSAH0002\nNo\nNA\nSahlgrenska University Hospital"
+    "text": "WLST\n\nPatients with short times to WLST\n\n\n\n\n\n\n\n\n\n\n\n\n\nStudyPatientID\nBrain injury\nOrgan failure\nComorbidity\nOther\nOther:Spec\n\n\n\n\n0380009\nYes\nNo\nNo\nNo\nNA\n\n\n0380010\nNo\nYes\nNo\nNo\nNA\n\n\n0380011\nNo\nYes\nNo\nNo\nNA\n\n\nHAL0006\nNo\nYes\nNo\nNo\nNA\n\n\nHEL0002\nYes\nNo\nNo\nNo\nNA\n\n\nHEL0008\nYes\nNo\nNo\nNo\nNA\n\n\nLIV0004\nNo\nYes\nNo\nNo\nNA\n\n\nLUN0001\nYes\nYes\nNo\nNo\nNA\n\n\nLUN0008\nNo\nYes\nNo\nNo\nNA\n\n\nLUN0014\nYes\nNo\nNo\nNo\nNA\n\n\nMAL0008\nYes\nNo\nNo\nNo\nNA\n\n\nMEI0002\nYes\nNo\nNo\nNo\nNA\n\n\nSAH0002\nYes\nNo\nNo\nNo\nNA\n\n\nSAH0007\nNo\nYes\nNo\nNo\nNA\n\n\n\n\n\n\n\nShort WLST only neurological reasons\n\n\n\n\n\n\n\n\n\n\n\nStudyPatientID\nOther reason for WLST\nOther_Specify\nHospital\n\n\n\n\n0380009\nNo\nNA\nWellington Hospital\n\n\nHEL0002\nNo\nNA\nHelsingborg Hospital\n\n\nHEL0008\nNo\nNA\nHelsingborg Hospital\n\n\nLUN0014\nNo\nNA\nSkåne University Hospital Lund\n\n\nMAL0008\nNo\nNA\nSkåne University Hospital Malmö\n\n\nMEI0002\nNo\nNA\nMeilahti Hospital\n\n\nSAH0002\nNo\nNA\nSahlgrenska University Hospital"
+  },
+  {
+    "objectID": "complete.html",
+    "href": "complete.html",
+    "title": "complete",
+    "section": "",
+    "text": "[[1]]\n\n\n\n\n\n\n\n\n\n\n[[2]]\n\n\n\n\n\n\n\n\n\n\n[[3]]\n\n\n\n\n\n\n\n\n\n\n[[4]]\n\n\n\n\n\n\n\n\n\n\n[[5]]\n\n\n\n\n\n\n\n\n\n\n[[6]]\n\n\n\n\n\n\n\n\n\n\n[[7]]\n\n\n\n\n\n\n\n\n\n\n[[8]]\n\n\n\n\n\n\n\n\n\n\n[[9]]\n\n\n\n\n\n\n\n\n\n\n[[10]]\n\n\n\n\n\n\n\n\n\n\n[[11]]\n\n\n\n\n\n\n\n\n\n\n[[12]]\n\n\n\n\n\n\n\n\n\n\n[[13]]\n\n\n\n\n\n\n\n\n\n\n[[14]]\n\n\n\n\n\n\n\n\n\n\n[[15]]\n\n\n\n\n\n\n\n\n\n\n[[16]]\n\n\n\n\n\n\n\n\n\n\n[[17]]\n\n\n\n\n\n\n\n\n\n\n[[18]]\n\n\n\n\n\n\n\n\n\n\n[[19]]\n\n\n\n\n\n\n\n\n\n\n[[20]]"
   }
 ]

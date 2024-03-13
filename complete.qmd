@@ -1,0 +1,87 @@
+---
+title: "complete"
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(here)
+library(openxlsx)
+library(reshape2)
+library(tidyr)
+library(readxl)
+library(stringr)
+library(here)
+library(tableone)
+library(knitr)
+library(kableExtra)
+library(purrr)
+library(gtsummary)
+library(gt)
+library(flextable)
+library(tidymodels)
+library(broom)
+library(lubridate)
+library(forcats)
+
+## Read the other files. 
+prep <- readRDS("/Users/josefdankiewicz/Library/CloudStorage/OneDrive-SharedLibraries-LundUniversity/cardiacarrest - Documents/STEPCARE/data/RDS/prep.rds")
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+## The overall data (green, questionmark, red):
+spiralchecknames <- c("Key.baseline","Baseline","Hourly.observations","Interventions",
+                      "Neuroprognostication","Discharge","Vital.status","D30","Complications","Biobank")
+
+sp_check <- prep %>% select(StudyPatientID, location_name, randomisation.datetime,all_of(spiralchecknames))
+
+## A function to show missing data ##
+
+missfizz2 <- function(dat){
+  xx <- dat %>%
+    select(-c(location_name)) %>%
+    gather(key,value,-c(StudyPatientID,randomisation.datetime)) %>% 
+    mutate(timediff = as.numeric(Sys.Date() - date(randomisation.datetime))) %>% 
+    mutate(missingness = case_when(value=="Complete" ~ "Done",
+                                   value=="?" & timediff<30 ~ "Started",
+                                   value=="?" & timediff>=30 ~ "Started (more than 30 days)",
+                                   value=="x" & timediff<30 ~ "Missing (recently randomized)",
+                                   value=="x" & timediff>=30 ~ "Missing (more than 30 days)")) %>%
+    mutate(missingness=factor(missingness, 
+                              levels=c("Done","Started","Started (more than 30 days)",
+                                       "Missing (recently randomized)","Missing (more than 30 days)"))) %>%
+    mutate(key=factor(key))
+  
+  
+  ggplot(xx, aes(x = key, y = fct_rev(StudyPatientID), fill = missingness)) +
+    geom_tile() +
+    scale_fill_manual(values= c("#2F9606","#C8E970", "#E5880A","#E7B800", "#961F06")) +
+    theme(axis.text.x  = element_text(angle=90, vjust=0.5)) + 
+    labs(x = "Variables in Dataset",
+         y = "Patient ID") +
+    coord_flip()
+}
+
+
+
+## Apply per site based on a list of variables 
+## The list of variables to be checked they MUST include StudyPatient ID, renamed as "id", location_name and temp=date##
+
+
+formslist <- list()
+for(i in 1:length(levels(sp_check$location_name))){
+  j <- missfizz2(subset(sp_check,location_name==levels(sp_check$location_name)[i]))
+  j <- j + ggtitle(paste(levels(sp_check$location_name)[i]))
+  formslist[[i]] <- j
+  namez <- paste0(levels(sp_check$location_name)[i],".pdf")
+  ppath <- here("plots","forms_per_site",namez)
+}
+
+
+##############################################
+##############################################
+
+```
+
+```{r echo=FALSE}
+formslist 
+```

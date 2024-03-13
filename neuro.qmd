@@ -75,7 +75,7 @@ wlst_reason <- prep %>% filter(hours.to.wlst<68) %>% select(StudyPatientID, DIS_
 
 names(wlst_reason) <- c("StudyPatientID","Brain injury","Organ failure","Comorbidity","Other","Other:Spec")
 
-wlst_reason_brain <- prep %>% filter(hours.to.wlst<72) %>% select(StudyPatientID, DIS_ICStopReasonsBrainInjury,
+wlst_reason_brain <- prep %>% filter(hours.to.wlst<68) %>% select(StudyPatientID, DIS_ICStopReasonsBrainInjury,
                                                              DIS_ICStopReasonsOrganFailure, DIS_ICStopReasonsComorbidity,
                                                             DIS_ICStopReasonsOther,DIS_ICStopReasonsOtherSpecify,location_name) %>%
   filter(DIS_ICStopReasonsBrainInjury=="Yes") %>% filter(DIS_ICStopReasonsComorbidity=="No") %>% 
@@ -86,11 +86,9 @@ names(wlst_reason_brain) <- c("StudyPatientID","Other reason for WLST","Other_Sp
 
 
 #   Early-neuro:
-#   1) If patient unconscious (FOUR-M <=3 on day 2), was a CT performed ≥20 h after randomisation?
-#   2) Hours between randomisation and biomarker collection. N/A?
 #   3) Was a continuous EEG and/or routine EEG performed ≤32 hours after randomisation?
 #   4) If no EEG (continuous or routine) was performed ≤32 h after randomisation, was any EEG performed after this timepoint? If so, how many hours after randomisation?
-#   5) Were biomarkers collected around 12 and 24 h after randomisation? Hours from randomisation to collection of 1st, 2nd, 3rd and 4th samples. 
+
 ```
 
 ### Patients with a long time to prognostication
@@ -112,8 +110,54 @@ print(kable(llist[[i]], format="markdown"))
 ## WLST
 ### Patients with short times to WLST
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+kable(wlst_reason, format="markdown")
+```
+### Short WLST only neurological reasons
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 kable(wlst_reason_brain, format="markdown")
 ```
+
+# Early Neuro
+###
+If patient unconscious (FOUR-M <=3 at 48h), was a CT performed ≥20 h after randomisation?
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+prep$time.to.ct1 <- as.numeric(prep$N_CTDateTime1st - prep$randomisation.datetime, units="hours")
+prep$time.to.ct2 <- as.numeric(prep$N_CTDateTime2nd - prep$randomisation.datetime, units="hours")
+prep$time.to.ct3 <- as.numeric(prep$N_CTDateTime3rd - prep$randomisation.datetime, units="hours")
+prep$time.to.last.ct <- prep %>% select(c(time.to.ct1,time.to.ct2,time.to.ct3)) %>% pmap(pmax,na.rm=T) %>% as.numeric
+
+prep$last.ct.after.20h <- ifelse(prep$time.to.last.ct>=20,"Yes","No")
+
+prep$awake.at.48h <- ifelse(prep$hours.to.awakening>=48,"No","Yes") 
+
+earlycheck1 <- prep %>% select(StudyPatientID, last.ct.after.20h,awake.at.48h) %>% 
+  filter(awake.at.48h=="No") %>% arrange(last.ct.after.20h)
+
+kable(earlycheck1, format="markdown")
+```
+###
+If patient unconscious (FOUR-M <=3 at 48h), was any EEG performed ≥20 h after randomisation? (cEEG or full montage)
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+prep$time.to.eeg.1st <- as.numeric(prep$N_EEGDateTime1st- prep$randomisation.datetime, units="hours")
+prep$ceeg <- prep$N_cEEG
+
+
+prep$eeg.before.36h <- ifelse(prep$time.to.eeg.1st<=36,"Yes","No")
+prep$ceeg.or.eeg.before.36h <- ifelse(prep$ceeg=="Yes","Yes",prep$eeg.before.36h)
+
+earlycheck2 <- prep %>% select(StudyPatientID, ceeg.or.eeg.before.36h,awake.at.48h) %>% filter(awake.at.48h=="No") %>% arrange(ceeg.or.eeg.before.36h)
+
+kable(earlycheck2, format="markdown")
+```
+### For patients who were unconscious at 48h and did not have an eeg before 36h, did they have any eeg?
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+yz <- earlycheck2 %>% filter(ceeg.or.eeg.before.36h=="No") %>% select(StudyPatientID)
+earlycheck3 <- prep %>% filter(StudyPatientID %in% yz$StudyPatientID) %>% select(StudyPatientID,N_EEG1st,time.to.eeg.1st)
+
+kable(earlycheck3, format="markdown")
+
+```
+
 
 
 
