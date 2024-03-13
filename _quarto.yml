@@ -5,6 +5,7 @@ project:
 website:
   title: "stepcareweb"
   navbar:
+    logo: "images/stepcare_logo_box.png"
     left:
       - href: index.qmd
         text: Home
@@ -15,6 +16,7 @@ website:
       - href: baseline.qmd
         text: Baseline
       - about.qmd
+       
       
 
 
@@ -23,6 +25,7 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
+    
 
 editor: visual
 
