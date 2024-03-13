@@ -3,7 +3,7 @@ title: "stepcareweb"
 date: today
 ---
 
-## STEPCARE - REPORT2
+## STEPCARE - REPORT
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
@@ -27,6 +27,14 @@ library(stringr)
 library(R.utils)
 
 ```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+prep <- readRDS("/Users/josefdankiewicz/Library/CloudStorage/OneDrive-SharedLibraries-LundUniversity/cardiacarrest - Documents/STEPCARE/data/RDS/prep.rds")
+inclusions <- nrow(prep)
+```
+
+# `{r} inclusions` participants randomized out of 3500
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 parentpath <- gsub("stepcareweb","",here())
